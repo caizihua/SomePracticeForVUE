@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <style>
+    [v-cloak]{
+        display: none;
+    }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 使用v-cloak解决插值表达式闪烁的问题 -->
+        <p v-cloak> {{ msg }} </p>
+
+        <!-- 默认v-text是没有闪烁问题的 -->
+        <!-- 会覆盖原本的内容，而v-cloak只会清除占位符，不会整个清空 -->
+        <h4 v-text = 'msg'></h4>
+
+        <!-- 前两者都只会输出普通文本，使用v-html输出html格式 -->
+        <div> {{ msg2 }} </div>
+        <div v-text='msg2'></div>
+        <div v-html='msg2'></div>
+
+        <!-- v-bind是Vue中用于绑定属性的指令 -->
+        <!-- v-bind会将后面的字符串当做表达式解析 -->
+        <input type = 'button' value = '按钮' v-bind:title="myTitle">
+        <input type = 'button' value = '按钮' v-bind:title="myTitle + '999'">
+        <!-- 舍去v-bind只要冒号也可以绑定 后面跟上绑定的属性 -->
+        <input type = 'button' value = '按钮' :title="myTitle">
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data : {
+                msg : "唐世杰" ,
+                msg2 : "<h1>夏欣</h1>",
+                myTitle : "这是title"
+            }
+        })
+    </script>
+</body>
+</html>

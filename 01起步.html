@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 导入Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <p> {{ msg }} </p>
+    </div>
+
+    <script>
+        //创建一个Vue实例
+        //导入包后在浏览器内存中，就多了Vue构造函数
+    var vm = new Vue({
+        el : '#app', //表示当前的Vue实例 是要控制哪个部分
+        data : {//属性中，存放el要用到的数据
+            msg:'欢迎学习Vue' //通过Vue指令，不再手动操纵DOM属性
+        }
+    })
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue 实例</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 注意 在遍历对象身上的键值对的时候，除了有val key之外，还有第三个位置就是索引 -->
+        <p v-for="(one,two,i) in list">值是：{{ one }}---键是：{{ two }}---索引值：{{i}} </p>
+    </div>
+    <script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            list:{
+                id : '2018',
+                name : '托尼·屎大颗',
+                gent : '男'
+            }
+        },
+        methods:{}
+    })
+    </script>
+</body>
+</html>

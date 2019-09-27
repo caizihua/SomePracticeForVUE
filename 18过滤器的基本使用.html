@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue 实例</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+    <p> {{ msg | msgFormat('疯狂') | test }} </p>
+    </div>
+    <script>
+        // 过滤器的定义语法
+
+        // 函数的第一个参数已经固定 永远是过滤器管道符前面传递过来的数据
+
+        /* Vue.filter('msgFormat',function(msg){
+            //字符串replace方法，第一个参数 除了可以写字符串之外，还能定义一个正则
+            return msg.replace(/单纯/g,'邪恶')
+        }) */
+        
+        // 函数第一个值固定之外 第二个值可以传参 参数在管道符后添加
+       Vue.filter('msgFormat',function(msg , arg){
+            //字符串replace方法，第一个参数 除了可以写字符串之外，还能定义一个正则
+            return msg.replace(/单纯/g,arg)
+        })
+
+        //过滤器可以多次调用处理 当第一次处理后  接着给下一个参数 继续处理 中间 只需管道符
+        Vue.filter('test',function(msg , arg){
+            //字符串replace方法，第一个参数 除了可以写字符串之外，还能定义一个正则
+            return msg + '55667788'
+        })
+        
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                msg:'单纯1，单纯2，单纯3，单纯4'
+            },
+            methods:{}
+    })
+    </script>
+</body>
+</html>

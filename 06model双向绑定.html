@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue 实例</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h4> {{ msg }} </h4>
+        <!-- v-bang只能实现数据的单向绑定，从 M 自动绑定到 V 中去 -->
+        <input type="text" :value="msg" style="width: 175px">
+
+        <!-- 使用v-mode指令实现表单和M中的双向数据绑定 -->
+        <!-- 注意：v-model只能运用在表单元素中 -->
+        <input type="text" v-model="msg" style="width: 175px">
+    </div>
+    <script>
+        //vm实际上是一个window对象
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            msg:'this is vue',
+        },
+        methods:{}
+    })
+    </script>
+</body>
+</html>

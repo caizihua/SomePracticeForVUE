@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue 实例</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="修改msg" @click="msg='No'">
+        <p id="h3"> {{ msg }} </p>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                msg:'Yes'
+            },
+            methods:{
+                show(){
+                    console.log('执行了show方法');
+                    
+                }
+            },
+            beforeCreate(){//遇到的第一个生命周期函数，表示实例被完全创建完之前我们会执行它
+                console.log(this.msg);
+                //注意：在beforeCreate 生命周期函数执行的时候 data和methods中的数据都还没有被初始化
+            },
+            created(){//遇见的第二个生命周期函数
+                console.log(this.msg);
+                this.show();
+                //在 created 中 data和methods都已经初始化好了
+                //如果要调用methods中的方法，最早也要在 created中调用
+            },
+            beforeMount(){//第三个生命函数，表示模板已经在内存中编辑完成 但是尚未把模板渲染到页面中去
+                console.log(document.getElementById('h3').innerText)
+                //在 beforeMount执行的时候，页面中的元素还没有真正被替换，只是之前写的一些模板字符串
+            },
+            mounted(){//遇到的第四个生命周期函数 表示已经内存中的模板已经真实的挂载到了页面中，用户已经看到渲染的页面了
+                console.log('mounted:' + document.getElementById('h3').innerText)
+                //注意： mounted 是实例创建周期中的最后一个周期函数，当执行完，表示实例已经完全创建好了 此时没有其他操作的话。这个实例就静静的在内存中了
+            },
+            //接下来是运行中的两个事件
+            beforeUpdate(){//这时候，表示 我们的界面还没有被更新 【数据肯定被更新了】
+                console.log('beforeUpdate：页面上的元素内容：' + document.getElementById('h3').innerText)//yes
+                console.log('beforeUpdate：data中的msg数据是：' + this.msg);//no
+                //当执行beforeUpdate 的时候 页面中显示的数据还是旧的，但是data中的数据是最新的，页面尚未和最新的数据同步
+            },
+            updated(){//这时候，表示 我们的界面已经被更新了
+                console.log('updated：页面上的元素内容：' + document.getElementById('h3').innerText)//no
+                console.log('updated：data中的msg数据是：' + this.msg);//no
+                //页面已经重新被渲染更新
+            }
+        })
+    </script>
+</body>
+</html>

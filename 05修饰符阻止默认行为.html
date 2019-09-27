@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <style>
+    .inner{
+        height:150px;
+        background-color: aqua;
+        width:150px;
+        position: relative;
+        display: block;
+    }
+    .inner2{
+        background-color: rgb(43, 219, 52);
+    }
+    .outer{
+        padding: 17px;
+        background-color: darkblue;
+        width:150px;
+
+    }
+
+    .inner input{
+        display: block;
+        position: absolute;
+        margin: auto;
+        text-align: center;
+        top: 50%;
+        right: 50%;
+    }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="inner" @click="divClick">
+            使用.stop阻止冒泡
+            <input type="button" value="戳戳" @click.stop="btnClick">
+        </div>
+
+        使用.prevent阻止默认事件<br>
+        <a href="https://www.baidu.com" @click.prevent="hrefClick">百度</a><br>
+
+        使用.capture触发捕获事件的机制
+        <div class="inner" @click.capture="divClick">
+            <input type="button" value="戳戳" @click="btnClick">
+        </div>
+
+        使用.self实现只有点击当前元素，才会触发的处理事件 只会阻止自身冒泡 只负责自己
+        <div class="inner2 inner" @click.self="divClick">
+            <input type="button" value="戳戳" @click="btnClick">
+        </div>
+
+        使用 .once时间只触发一次<br>
+        <a href="https://www.baidu.com" @click.once.prevent="hrefClick">百度</a><br>
+
+        .stop和.self的区别<br>
+        .stop是阻止全部而.self只阻止自身
+        <div class="outer" @click="div2Click">
+            <div class="inner" @click="divClick">
+                <input type="button" value="戳戳" @click.stop="btnClick">
+            </div>
+        </div>
+        <div class="outer" @click="div2Click">
+            <div class="inner" @click.self="divClick">
+                <input type="button" value="戳戳" @click="btnClick">
+            </div>
+        </div>
+
+    </div>
+    <script>
+    var vm = new Vue({
+        el:'#app',
+        data:{},
+        methods:{
+            divClick(){
+                console.log('触发了div点击事件')
+            },
+            btnClick(){
+                console.log('触发了btn点击事件')
+            },
+            hrefClick(){
+                console.log('触发了链接点击事件');
+                
+            },
+            div2Click(){
+                console.log('触发了div2点击事件')
+            }
+        }
+    })
+    </script>
+</body>
+</html>
