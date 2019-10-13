@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue 实例</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <count></count>
+        <hr>
+        <count></count>
+        <hr>
+        <count></count>
+        <hr>
+        //当return dataObj时发现点击一个按钮，全部都将+1，这是因为所有的实例都引用共同的dataObj
+    </div>
+
+    <template id="tmpl">
+        <div>
+            <input type="button" value="+1" @click="increment">
+            <h3> {{ count }} </h3>
+        </div>
+    </template>
+
+    <script>
+        var dataObj = { count:0 }
+
+        //计数器组件，点击按钮，让data中的数据加1
+        Vue.component('count',{
+            template:'#tmpl',
+            data:function(){
+                // return dataObj
+                return { count:0 }
+            },
+            methods:{
+                increment(){
+                    this.count+=1
+                }
+            }
+            
+        })
+        var vm = new Vue({
+            el:'#app',
+            data:{},
+            methods:{}
+        })
+    </script>
+</body>
+</html>

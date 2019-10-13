@@ -31,7 +31,7 @@
                  //箭头函数中的this指向外部的this
                 if(this.intervalId != null) return
  
-                 this.intervalId =  setInterval( ()=>{
+                this.intervalId =  setInterval( ()=>{
                     var start = this.msg.substring(0,1);
                     var end = this.msg.substring(1);
                     this.msg = end + start

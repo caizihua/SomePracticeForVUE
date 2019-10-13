@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue 实例</title>
+    <script src="../vue.js"></script>
+    <style>
+    .ball{
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: red;
+    }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="加入" @click="flag=!flag">
+        <!-- 1.使用transition 把小球包裹起来 -->
+        <transition
+        @before-enter="beforeEnter"
+        @enter="enter"
+        @after-enter="afterEnter">
+            <div class="ball" v-show="flag"></div>
+        </transition>
+    </div>
+    <script>
+
+        // Vue.directive('focus',function(el){})
+
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                flag:false
+            },
+            methods:{
+                //动画钩子函数的第一个参数el，表示要执行动画的第一个参数，是个原生的js对象
+                //document.getElementById('') 通过这种来获得的原生对象
+                beforeEnter(el){
+                    //在入场之前，尚未开始动画，可以设置起始样式
+                    el.style.transform = "translate(0,0)"
+                },
+                enter(el,done){
+                    //这句话没有实际作用，如果不写，出不来效果
+                    //el.offsetWidth;会强制动画刷新
+                    el.offsetWidth;
+                    // console.log(el.offsetWidth)
+                    //表示动画开始之后的样式，可以设置小球完成动画之后的结束状态
+                    el.style.transform = "translate(150px, 450px)"
+                    el.style.transition = 'all 1s ease-in'
+                    done()
+                },
+                afterEnter(el){
+                    //动画完成之后调用
+                    this.flag=!this.flag;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

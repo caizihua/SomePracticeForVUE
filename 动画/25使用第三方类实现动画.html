@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue 实例</title>
+    <link rel="stylesheet" href="https://unpkg.com/animate.css@3.5.2/animate.min.css">
+    <script src="../vue.js"></script>
+    <!-- 入场使用bounceIn 离场使用bounceOut -->
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="toggle" @click="flag=!flag">
+        <!-- :duration 统一表示一个动画的时长 -->
+        <!-- <transition enter-active-class="bounceIn" leave-active-class="bounceOut" :duration="1000">
+            <h3 v-if="flag" class="animated">这是一个h3</h3>
+        </transition> -->
+
+
+        <!-- 使用:duration="{enter:1000,leave:2000}分别设置进场离场的时间 -->
+        <transition enter-active-class="bounceIn" leave-active-class="bounceOut" :duration="{enter:1000,leave:2000}">
+            <h3 v-if="flag" class="animated">这是一个h3</h3>
+        </transition>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                flag:false
+            },
+            methods:{}
+        })
+    </script>
+</body>
+</html>

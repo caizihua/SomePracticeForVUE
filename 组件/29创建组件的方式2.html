@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue 实例</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <my-com></my-com>
+    </div>
+    <script>
+        //无论是哪种方式，组件必须具有唯一的根元素，同级则会报错
+        Vue.component('myCom',{
+            template:'<h3>这是直接使用 Vue.component 创建出来的组件</h3>'
+        })
+
+        var vm = new Vue({
+            el:'#app',
+            data:{},
+            methods:{}
+        })
+    </script>
+</body>
+</html>

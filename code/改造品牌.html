@@ -45,7 +45,7 @@
                         <td> {{ item.name }} </td>
                         <td> {{ item.ctime }} </td>
                         <td>
-                            <a href="javascript:;">删除</a>
+                            <a href="" @click.prevent="del(item.id)">删除</a>
                         </td>
                     </tr>
                 </tbody>
@@ -64,21 +64,38 @@
                 ],
                 name:''
             },
-            created(){
+            mounted(){
                 this.getAllLis()
             },
             methods:{
-                add(){
-
-                },
                 getAllLis(){
-                    this.$http.get('http://192.168.1.143:1107').then(result=>{
-                        console.log(1);
-                        
-                        if(result === 0){
+                    this.$http.get('https://caizihua.github.io/test/').then(result=>{
+                        console.log(result);
+                        var result = result.body
+                        if(result.status === 0){
                             this.list = result.message;
                         }else{
                             alert('获取数据失败！')
+                        }
+                    })
+                },
+                add(){
+                    this.$http.post('https://caizihua.github.io/test/',{ name:this.name }, { emulateJSON: true }).then(result=>{
+                        if(result.body.status === 0){
+                            this.getAllLis()
+                            this.name = ''
+                        }else{
+                            alert("添加失败！")
+                        }
+                    })
+                },
+                del(id){
+                    this.$http.get('http:/' + id).then(result=>{
+                        if( result.body.status===0 )
+                        {
+                            this.getAllLis();
+                        }else{
+                            alert("删除失败")
                         }
                     })
                 }
