@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue 实例</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <input type="button" value="获取元素" @click="getEle">
+    <h3 class="myH3" ref="myH3">23333333333333333333333333333333333</h3>
+    <hr>
+    <login ref="myLogin"></login>
+  </div>
+  <script>
+    var login = {
+      template:'<h3>2333</h3>',
+      data(){
+        return{
+          msg:'son msg'
+        }
+      },
+      methods:{
+        show(){
+          console.log('调用了子组件的方法');
+          
+        }
+      }
+      
+    }
+
+    var vm = new Vue({
+      el:'#app',
+      data:{},
+      methods:{
+        getEle(){
+          console.log(this.$refs.myH3.innerText);
+          // console.log(this.$refs.myLogin.msg);
+          // this.$refs.myLogin.show();
+          
+        }
+      },
+      components:{
+        login
+      }
+    })
+  </script>
+</body>
+</html>

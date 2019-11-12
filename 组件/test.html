@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue 实例</title>
+  <script src="../vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!--开关组件-->
+    <switchbtn :result="result"></switchbtn>
+    <!--外部控制-->
+    <input type="button" value="change" @click="change">
+  </div>
+  <template>
+    <div>
+      <child :data="data" :obj="obj" />
+      <h1>data: {{data}}</h1>
+      <h1>objData: {{obj.data}}</h1>
+    </div>
+  </template>
+  <script>
+    //开关组件代码
+    Vue.component("switchbtn", {
+      template: "<div @click='change'>{{result?'开':'关'}}</div>",
+      props: ["result"],
+      methods: {
+        change() {
+          this.result = !this.result;
+        }
+      }
+    });
+
+    //调用组件
+    new Vue({
+      el: "#app",
+      data: {
+        result: true //开关状态数据
+      },
+      methods: {
+        change() {
+          this.result = !this.result;
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

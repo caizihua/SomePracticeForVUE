@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue 实例</title>
+  <script src="../vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 父组件在引用子组件的时候，用过属性绑定（v-bind:）的形式，
+    把需要传递给子组件的数据，以属性绑定的形式传递到子组件内部，供子组件使用。 -->
+    <com1 v-bind:parent="msg"></com1>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        msg: "aaa"
+      },
+      methods: {},
+      components: {
+        com1: {
+          //1.data中的数据是自己私有的，然而props中的数组是父组件传递的
+          //2.data 中的数据都是可读可写的，但是 props 中的数据只可读
+          data() {
+            return {
+              title: '123',
+              //1通过重新分配赋值可以是props传到的值使用不报错
+              //2这样还要将点击函数中的this和template中的变量名更改
+              //parents: this.parent
+            }
+          },
+          //结论：默认情况下子组件访问不了父组件的东西
+          //template: "<h1>这是子组件 ---{{ msg }} </h1>"
+          template: "<h1 @click='change'>这是子组件 ---{{ parent }} </h1>",
+          props: ["parent"], //把父组件传递过来的 parent 属性，先在 pros 数组中定义一遍，这样才能使用
+          methods: {
+            change() {
+              this.parent = "被修改了"
+              console.log(this);
+            }
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
