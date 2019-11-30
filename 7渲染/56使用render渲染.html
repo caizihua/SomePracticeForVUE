@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue 实例</title>
+  <script src="../code/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+  
+  </div>
+  <script>
+    var login = {
+      template:'<h1>这是登录组件！</h1>'
+    }
+    var vm = new Vue({
+      el:'#app',
+      data:{},
+      methods:{},
+      render: function (createElements) {//createElements是一个方法，调用它能够把指定的模板文件，渲染为html结构。
+        return createElements(login)
+        //return 的结果会替换页面中el指定的那个容器，这样id为app的div就会被这个组件所代替
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue 实例</title>
+  <script src="../code/vue.js"></script>
+  <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div id="app">
+    <!-- 1、我们要监听到文本框数据的改变，这样才能知道，什么时候拼接 -->
+    <!-- 2、使用键盘 keyup 监听数据的改变 -->
+    <div class="form-group">
+      <input type="text" v-model="firstName" class="form-control" style="width: auto;" @keyup="getFullName"> +
+    </div>
+    <div class="form-group">
+      <input type="text" v-model="lastName" class="form-control" style="width: auto;" @keyup="getFullName"> =
+    </div>
+    <div class="form-group">
+      <input type="text" v-model="fullName" class="form-control" style="width: auto;">
+    </div>
+    
+    
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        firstName:'',
+        lastName:'',
+        fullName:'',
+      },
+      methods: {
+        getFullName(){
+          this.fullName = this.firstName + '-' + this.lastName
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

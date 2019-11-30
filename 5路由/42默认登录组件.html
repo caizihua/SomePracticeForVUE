@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue 实例</title>
+  <script src="../code/vue.js"></script>
+  <!-- 1安装 -->
+  <script src="../code/vue-router.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- router-link 默认渲染一个 a 标签 -->
+    <!-- 如果想要更改标签 添加 tag属性 但无论什么标签 依然后绑定一个点击事件 -->
+    <router-link to="/login">登录</router-link>
+    <router-link to="/register">注册</router-link>
+
+    <!-- 1点击两个链接 会先修改地址 -->
+    <!-- 2路由监听到地址的改变，然后进行路由规则的匹配 path规则 -->
+    <!-- 3匹配到 进行改变 -->
+    <!-- 注意！：这里的路径 应该是hash 所以应该加#号 -->
+    <!-- <a href="#/login">登录</a>
+    <a href="#/register">注册</a> -->
+    <!-- 这是 vue-router 提供的元素 ，专门用来 当做占位符的将来 路由规则匹配到的组件，就会展示到这个组件中去 -->
+    <!-- 所以我们可以把 它认为是一个占位符 -->
+    <router-view></router-view>
+  </div>
+  <script>
+    //登录组件的模板对象
+    var login = {
+      template: '<h1>登录组件</h1>'
+    }
+    //下面这种表示引用值 不能使用在上面的属性值中
+    //Vue.component('login',{ template:'<h1>登录组件</h1>' })
+    var register = {
+      template: '<h1>注册组件</h1>'
+    }
+
+    // 2创建一个路由对象，当导入 router包后，window全局对象中，自动创建了 VueRouter 的路由构造函数
+    // 在 new 路由对象的时候，可以为构造函数，构造一个 配置对象
+    var routerObj = new VueRouter({
+      // router 这个配置对象 表示 路由匹配规则 的意思
+      // 属性1 是 path 表示监听，哪一个路由链接地址
+      // 属性2 是 component 表示 如果 路由是前面匹配到的path 则展示 component 属性对应的那个组件 
+      routes: [
+        //注意 component 的属性值 必须是模板对象  不能是引用值 
+        { path: '/login', component: login },
+        { path: '/register', component: register },
+        //可以设置默认路径 但是不推荐 因为链接路径并没改变
+        //{ path: '/', component:login }
+        { path: '/',redirect:'/login' } //redirect 重定向
+      ]
+    })
+
+    var vm = new Vue({
+      el: '#app',
+      data: {},
+      methods: {},
+      router: routerObj //将路由规则对象 注册到vm实例上，用来监听URL地址的变化，然后展示相应的组件
+    })
+  </script>
+</body>
+
+</html>

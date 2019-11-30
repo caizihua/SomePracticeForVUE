@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue 实例</title>
+  <script src="../code/vue.js"></script>
+  <script src="../code/vue-router.js"></script>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+  .header{
+    height: 80px;
+    background-color: rgb(228, 222, 222);
+  }
+  .container{
+    display: flex;
+    height: 800px;
+  }
+  h1{
+    margin: 0;
+    padding: 10px;
+    font-weight: 300;
+  }
+  .left{
+    background-color: cadetblue;
+    flex: 2;
+  }
+  .main{
+    background-color: aliceblue;
+    flex:8;
+  }
+  </style>
+</head>
+<body>
+  <div id="app">
+     
+    <router-view></router-view>
+    <div class="container">
+      <!-- 可以命名，表示对应名称的组件 -->
+      <!-- 前面加:表示的是变量名，不加:永远都是字符串 -->
+      <router-view name="left"></router-view>
+      <router-view name="main"></router-view>
+    </div>
+
+  </div>
+  <script>
+    var header = {
+      template:'<h1 class="header">header 头部区域</h1>'
+    }
+    var leftBox = {
+      template:'<h1 class="left">left 侧边栏区域</h1>'
+    }
+    var mainBox = {
+    template:'<h1 class="main">main 主体区域</h1>'
+    }
+    //创建路由对象
+    var router = new VueRouter({
+      routes:[
+        {path:'/',components:{
+          default:header,
+          left:leftBox,
+          main:mainBox
+        }},
+      ]
+    })
+    var vm = new Vue({
+      el:'#app',
+      data:{},
+      methods:{},
+      router
+    })
+  </script>
+</body>
+</html>

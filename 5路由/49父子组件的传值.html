@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue 实例</title>
+  <script src="../code/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- HTML 中的特性名是大小写不敏感的，所以浏览器会把所有大写字符解释为小写字符。
+    这意味着当你使用 DOM 中的模板时，camelCase (驼峰命名法) 的
+    prop 名需要使用其等价的 kebab-case (短横线分隔命名) 命名。-->
+    <!-- 属性绑定时用的 - ，在props和引用中就必须用驼峰
+    这与在实例中使用驼峰命名组件名称，在标签中使用 - 相同 -->
+    <com-com :parent-msg="msg" @func="getMsg"></com-com>
+  </div>
+  <template id="tem1">
+    <div>
+      <h1>这是子元素 --- {{ parentMsg }} </h1>
+      <input type="button" value="向父组件传递消息" @click="sendMsg">
+    </div>
+  </template>
+  <script>
+    var comCom = {
+      template:'#tem1',
+      data(){
+        return {
+           msg1:'子组件的数据1',
+           msg2:'子组件的数据2'
+        }
+      },
+      props:["parentMsg"],
+      methods:{
+        sendMsg(){
+          this.$emit('func',this.msg1,this.msg2)
+        }
+      }
+    }
+    var vm = new Vue({
+      el:'#app',
+      data:{
+        msg:'父组件的数据',
+        msgFromSon1:'',
+        msgFromSon2:''
+      },
+      methods:{
+        getMsg(data1,data2){
+          this.msgFromSon1 = data1
+          this.msgFromSon2 = data2
+          console.log(this.msgFromSon1);
+          console.log(this.msgFromSon2);
+        }
+      },
+      components:{
+        comCom
+      }
+    })
+  </script>
+</body>
+</html>

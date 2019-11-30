@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Vue 实例</title>
-    <script src="./vue.js"></script>
+    <script src="../code/vue.js"></script>
 </head>
 <body>
     <div id="app">
         <h4> {{ msg }} </h4>
-        <!-- v-bang只能实现数据的单向绑定，从 M 自动绑定到 V 中去 -->
+        <!-- v-bind只能实现数据的单向绑定，从 M 自动绑定到 V 中去 -->
         <input type="text" :value="msg" style="width: 175px">
 
         <!-- 使用v-mode指令实现表单和M中的双向数据绑定 -->
